@@ -1,0 +1,79 @@
+.profile-page {
+  &.isLoading {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    height: 100vh;
+  }
+
+  .cover-photo {
+    height: 500px;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: row;
+    gap: 56px;
+
+    padding: 40px 120px;
+
+    .profile-info {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      gap: 24px;
+
+      width: 70%;
+
+      .header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        width: 100%;
+
+        .profile-pic {
+          width: 175px;
+          height: 175px;
+          border-radius: 8px;
+        }
+
+        .edit-btn {
+          height: fit-content;
+        }
+      }
+
+      .title-name {
+        font-family: "Poppins", sans-serif;
+
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        h1 {
+          font-weight: 500;
+          font-size: 30px;
+          line-height: 34px;
+        }
+
+        h4 {
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 40px;
+
+          color: #a8a8a8;
+        }
+
+        p {
+          font-weight: 300;
+          line-height: 150%;
+          font-size: 16px;
+
+          color: #111111;
+        }
+      }
+    }
+  }
+}
