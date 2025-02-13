@@ -8,15 +8,23 @@ const axiosRequest = axios.create({
 axiosRequest.interceptors.request.use(
   (config) => {
     const SESSION = JSON.parse(localStorage.getItem(LOCAL_STORAGE.TOKEN));
-    return {
-      ...config,
-      headers: {
-        ...(SESSION.token !== null && {
-          Authorization: `Bearer ${SESSION.token}`,
-        }),
-        ...config.headers,
-      },
-    };
+    console.log(SESSION);
+
+    if (SESSION) {
+      return {
+        ...config,
+        headers: {
+          ...(SESSION?.token !== null && {
+            Authorization: `Bearer ${SESSION?.token}`,
+          }),
+          ...config.headers,
+        },
+      };
+    } else {
+      return {
+        ...config,
+      };
+    }
   },
   (error) => {
     return Promise.reject(error);

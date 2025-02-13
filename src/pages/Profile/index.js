@@ -31,7 +31,10 @@ const ProfilePage = () => {
   useEffect(() => {
     const getProfileInfo = async () => {
       loading();
+
       try {
+        console.log(userID);
+
         if (userID) {
           const response = await axiosRequest.get(`/users/${userID}`);
 
@@ -39,11 +42,9 @@ const ProfilePage = () => {
             const SESSION = JSON.parse(
               localStorage.getItem(LOCAL_STORAGE.TOKEN)
             );
-
-            if (SESSION.userId === userID && SESSION.token) {
+            if (SESSION?.userId === userID && SESSION?.token) {
               setLogStatus(true);
             }
-
             setUserInfo(response.data);
             finishLoading();
           }
@@ -100,7 +101,7 @@ const ProfilePage = () => {
                 <p>{userInfo.page_description}</p>
               </div>
             </div>
-            {isLogged && <Goal />}
+            <Goal />
           </div>
         </>
       )}

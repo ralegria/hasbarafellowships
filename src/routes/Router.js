@@ -5,7 +5,7 @@ import ProfilePage from "../pages/Profile";
 
 const Router = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/students-fundraising-program">
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/register" element={<HomePage />} />

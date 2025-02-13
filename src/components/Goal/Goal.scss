@@ -36,6 +36,7 @@
     .goal-body {
       display: flex;
       flex-direction: column;
+      gap: 24px;
 
       padding: 24px;
       font-family: "Inter", sans-serif;
@@ -86,6 +87,46 @@
               font-size: 16px;
 
               color: #454342;
+            }
+          }
+        }
+      }
+
+      .donate-table {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+
+        h5 {
+          font-family: "Inter", sans-serif;
+          font-size: 16px;
+          font-weight: 400;
+
+          color: #a0a0a0;
+        }
+
+        ul.amount-table {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          row-gap: 12px;
+          column-gap: 17px;
+
+          list-style: none;
+          padding: 0;
+
+          li {
+            border: 1px solid #c4c3c3;
+            text-align: center;
+            padding: 20px 0;
+
+            width: 30.17%;
+            cursor: pointer;
+
+            &:hover {
+              border-radius: 3px;
+              border-color: #153f71;
+              color: #153f71;
             }
           }
         }

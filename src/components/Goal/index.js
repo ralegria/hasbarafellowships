@@ -4,9 +4,11 @@ import { useNavigate, useParams } from "react-router";
 import { Button, Form, InputNumber, Progress, Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { currency, fromCents, toCents } from "../../utils";
+import { AMOUNT_PATTERNS } from "../../consts";
 
 import useUI from "../../hooks/useUI";
 import CustomForm from "../CustomForm";
+import DonateTable from "./DonateTable";
 
 import "./Goal.scss";
 
@@ -16,6 +18,7 @@ const Goal = () => {
   const {
     goalInfo,
     isGoalEditing,
+    isLogged,
     editingGoal,
     setNewGoal,
     setEmptyGoal,
@@ -67,8 +70,6 @@ const Goal = () => {
         if (userID) {
           const response = await axiosRequest.get(`goals/${userID}`);
 
-          console.log(response);
-
           if (response.status === 200) {
             setNewGoal({
               expected: fromCents(response.data.amount),
@@ -88,7 +89,7 @@ const Goal = () => {
     <div className="goal-column">
       <div className="goal-container">
         <div className="goal-header">
-          <h4>Your goal</h4>
+          <h4>{isLogged ? "Your Goal" : "Donate"}</h4>
           {isLoading && <Spin indicator={<LoadingOutlined spin />} />}
         </div>
         <div className="goal-body">
@@ -108,17 +109,20 @@ const Goal = () => {
                   showInfo={false}
                 />
               </div>
-              <Button type="primary" onClick={editingGoal}>
-                Edit goal
-              </Button>
+              {isLogged && (
+                <Button type="primary" onClick={editingGoal}>
+                  Edit goal
+                </Button>
+              )}
             </div>
           )}
-          {!isGoalEditing && goalInfo.expected === 0 && (
+          {!isLogged && <DonateTable />}
+          {isLogged && !isGoalEditing && goalInfo.expected === 0 && (
             <Button type="default" onClick={editingGoal}>
               Add a new goal
             </Button>
           )}
-          {isGoalEditing && (
+          {isLogged && isGoalEditing && (
             <CustomForm
               className="goal-form"
               layout="vertical"
@@ -131,16 +135,16 @@ const Goal = () => {
                 rules={[
                   {
                     required: true,
-                    pattern: /^(0(?!\.00)|[1-9]\d{0,6})(?:\.\d{1,2})?$/,
+                    pattern: AMOUNT_PATTERNS.PATTERN,
                     message: "Please input a valid goal amount",
                   },
                 ]}
               >
                 <InputNumber
                   placeholder="Type your goal here..."
-                  parser={(value) => value?.replace(/\$\s?|(,*)/g, "")}
+                  parser={(value) => value?.replace(AMOUNT_PATTERNS.PARSER, "")}
                   formatter={(value) =>
-                    `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                    `$ ${value}`.replace(AMOUNT_PATTERNS.FORMATTER, ",")
                   }
                 />
               </Form.Item>
@@ -160,9 +164,11 @@ const Goal = () => {
           )}
         </div>
       </div>
-      <Button type="link" onClick={onLogout}>
-        Log Out
-      </Button>
+      {isLogged && (
+        <Button type="link" onClick={onLogout}>
+          Log Out
+        </Button>
+      )}
     </div>
   );
 };

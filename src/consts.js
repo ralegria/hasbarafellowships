@@ -1,3 +1,8 @@
+export const AMOUNT_PATTERNS = {
+  PATTERN: /^(0(?!\.00)|[1-9]\d{0,6})(?:\.\d{1,2})?$/,
+  PARSER: /\$\s?|(,*)/g,
+  FORMATTER: /\B(?=(\d{3})+(?!\d))/g,
+};
 export const LOCAL_STORAGE = {
   TOKEN: "auth_token",
 };
