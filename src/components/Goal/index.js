@@ -1,5 +1,5 @@
 import axiosRequest from "../../axiosInterceptor";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { AMOUNT_PATTERNS } from "../../consts";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useNavigate, useParams } from "react-router";
@@ -15,6 +15,7 @@ import "./Goal.scss";
 
 const Goal = ({ donationMade = null }) => {
   const navigate = useNavigate();
+  const isFirstRender = useRef(true);
   const { userID } = useParams();
   const {
     goalInfo,
@@ -92,8 +93,11 @@ const Goal = ({ donationMade = null }) => {
         }
       }
     };
-    getCurrentGoalInfo();
-  }, [userID]);
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      getCurrentGoalInfo();
+    }
+  }, [userID, setEmptyGoal, setNewGoal]);
 
   return (
     <div className="goal-column">

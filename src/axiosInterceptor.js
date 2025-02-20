@@ -8,7 +8,7 @@ const axiosRequest = axios.create({
 axiosRequest.interceptors.request.use(
   (config) => {
     const SESSION = JSON.parse(localStorage.getItem(LOCAL_STORAGE.TOKEN));
-    console.log(SESSION);
+    //console.log(SESSION);
 
     if (SESSION) {
       return {

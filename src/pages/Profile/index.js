@@ -1,6 +1,6 @@
 import cn from "classnames";
 import { Button } from "antd";
-import { useEffect } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router";
 import axiosRequest from "../../axiosInterceptor";
 import useUI from "../../hooks/useUI";
@@ -12,8 +12,10 @@ import { LOCAL_STORAGE } from "../../consts";
 
 import "./Profile.scss";
 
-const ProfilePage = ({ donationMade = false }) => {
+const ProfilePage = () => {
   const navigate = useNavigate();
+  const sectionName = "profile";
+  const isFirstRender = useRef(true);
   const { userID, status: donationStatus } = useParams();
   const {
     isProfileEditing,
@@ -27,45 +29,46 @@ const ProfilePage = ({ donationMade = false }) => {
     editingProfile,
   } = useUI();
 
-  //Getting profile info
-  useEffect(() => {
-    const getProfileInfo = async () => {
-      loading();
+  const getProfileInfo = useCallback(async () => {
+    loading(sectionName);
+    try {
+      if (userID) {
+        const response = await axiosRequest.get(`/users/${userID}`);
 
-      try {
-        console.log(userID);
-
-        if (userID) {
-          const response = await axiosRequest.get(`/users/${userID}`);
-
-          if (response.status === 200) {
-            const SESSION = JSON.parse(
-              localStorage.getItem(LOCAL_STORAGE.TOKEN)
-            );
-            if (SESSION?.userId === userID && SESSION?.token) {
-              setLogStatus(true);
-            }
-            setUserInfo(response.data);
-            finishLoading();
+        if (response.status === 200) {
+          const SESSION = JSON.parse(localStorage.getItem(LOCAL_STORAGE.TOKEN));
+          if (SESSION?.userId === userID && SESSION?.token) {
+            setLogStatus(true);
           }
-        }
-      } catch (error) {
-        if (error.status === 401) {
-          navigate("/login");
-          finishLoading();
+          setUserInfo(response.data);
         }
       }
-    };
+    } catch (error) {
+      if (error.response?.status === 401) {
+        navigate("/login");
+      } else {
+        console.error("Error fetching profile info:", error);
+      }
+    } finally {
+      finishLoading();
+    }
+  }, [finishLoading, loading, navigate, setLogStatus, setUserInfo, userID]);
 
-    getProfileInfo();
-  }, [userID]);
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      getProfileInfo();
+    }
+  }, [getProfileInfo]);
 
   return (
     <div
-      className={cn("profile-page", { isLoading: SectionIsLoading("general") })}
+      className={cn("profile-page", {
+        isLoading: SectionIsLoading(sectionName),
+      })}
     >
-      {SectionIsLoading("general") && <SpinLoader />}
-      {!SectionIsLoading("general") && !isProfileEditing && (
+      {SectionIsLoading(sectionName) && <SpinLoader />}
+      {!SectionIsLoading(sectionName) && !isProfileEditing && (
         <>
           <header
             className="cover-photo"
@@ -105,7 +108,9 @@ const ProfilePage = ({ donationMade = false }) => {
           </div>
         </>
       )}
-      {!SectionIsLoading("general") && isProfileEditing && <ProfileEditPage />}
+      {!SectionIsLoading(sectionName) && isProfileEditing && (
+        <ProfileEditPage />
+      )}
     </div>
   );
 };
