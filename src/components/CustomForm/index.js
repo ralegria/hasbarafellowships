@@ -4,14 +4,15 @@ import { useSelector } from "react-redux";
 
 import "./CustomForm.scss";
 
-const CustomForm = ({
-  children,
-  disabled = false,
-  className = null,
-  layout = "vertical",
-  onFinish = () => {},
-  onValuesChange = () => {},
-}) => {
+const CustomForm = (props) => {
+  const {
+    children,
+    disabled = false,
+    className = null,
+    layout = "vertical",
+    onFinish = () => {},
+    onValuesChange = () => {},
+  } = props;
   const formAlert = useSelector((store) => store.UI.formAlert);
 
   return (
@@ -20,6 +21,7 @@ const CustomForm = ({
         <Alert message={formAlert?.message} type={formAlert.type} />
       )}
       <Form
+        {...props}
         layout={layout}
         className={cn("form", className)}
         onFinish={onFinish}
