@@ -11,6 +11,7 @@ import {
   setEmptyGoal as setEmpty,
   setLogStatus as setLog,
 } from "../redux/slices/UserSlice";
+import { setDonationAmount } from "../redux/slices/DonationSlice";
 
 const errorInitialValue = { type: "success", message: null };
 
@@ -21,6 +22,7 @@ export const useUI = () => {
   const isGoalEditing = useSelector((store) => store.UI.goalEditMode);
   const userInfo = useSelector((store) => store.user.info);
   const goalInfo = useSelector((store) => store.user.goal);
+  const donationAmount = useSelector((store) => store.donations.amount);
 
   const loading = (section) => dispatch(switchLoading({ section }));
   const setUserInfo = (info) => dispatch(storeUser(info));
@@ -31,6 +33,7 @@ export const useUI = () => {
   const editingGoal = () => dispatch(switchGoalEditMode());
   const setNewAlert = (alert) => dispatch(setNewFormAlert(alert));
   const clearAlerts = () => dispatch(setNewFormAlert(errorInitialValue));
+  const setDonation = (amount) => dispatch(setDonationAmount(amount));
   const SectionIsLoading = (section) =>
     useSelector((store) =>
       store.UI.loading.section === section ? store.UI.loading.isLoading : false
@@ -47,6 +50,7 @@ export const useUI = () => {
     isGoalEditing,
     userInfo,
     goalInfo,
+    donationAmount,
     setLogStatus,
     SectionIsLoading,
     loading,
@@ -58,6 +62,7 @@ export const useUI = () => {
     setEmptyGoal,
     setNewAlert,
     clearAlerts,
+    setDonation,
   };
 };
 

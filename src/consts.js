@@ -16,6 +16,9 @@ export const MESSAGES = {
         "The password you entered is incorrect. Please try again or reset your password if you've forgotten it.",
     },
   },
+  DONATE: {
+    ERROR: "Sorry! Something was wrong, please try again!",
+  },
 };
 
 export const REGISTER_FORM_STEPS = {

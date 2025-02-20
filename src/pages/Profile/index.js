@@ -12,9 +12,9 @@ import { LOCAL_STORAGE } from "../../consts";
 
 import "./Profile.scss";
 
-const ProfilePage = () => {
+const ProfilePage = ({ donationMade = false }) => {
   const navigate = useNavigate();
-  const { userID } = useParams();
+  const { userID, status: donationStatus } = useParams();
   const {
     isProfileEditing,
     userInfo,
@@ -101,7 +101,7 @@ const ProfilePage = () => {
                 <p>{userInfo.page_description}</p>
               </div>
             </div>
-            <Goal />
+            <Goal donationMade={donationStatus} />
           </div>
         </>
       )}

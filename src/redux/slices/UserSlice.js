@@ -22,7 +22,7 @@ export const UserSlice = createSlice({
       state.goal = {
         ...state.goal,
         ...action.payload,
-        percentage: state.goal.collected / state.goal.expected,
+        percentage: (state.goal.collected / state.goal.expected) * 100,
       };
     },
     setEmptyGoal: (state) => {

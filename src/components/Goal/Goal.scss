@@ -116,17 +116,85 @@
           padding: 0;
 
           li {
-            border: 1px solid #c4c3c3;
+            border: 2px solid #c4c3c3;
             text-align: center;
             padding: 20px 0;
+            border-radius: 3px;
 
-            width: 30.17%;
+            width: 29%;
             cursor: pointer;
 
-            &:hover {
-              border-radius: 3px;
+            &.isSelected {
               border-color: #153f71;
               color: #153f71;
+            }
+
+            &:hover {
+              border-color: #153f71;
+              color: #153f71;
+            }
+          }
+        }
+
+        .donation-form {
+          .actions-container {
+            .or-login {
+              &::before,
+              &::after {
+                width: 12% !important;
+              }
+            }
+          }
+        }
+      }
+
+      .success-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 8px;
+        gap: 24px;
+
+        .donation-message {
+          display: flex;
+          flex-direction: column;
+          text-align: center;
+          gap: 10px;
+
+          h1 {
+            font-family: "Roboto", sans-serif;
+            font-size: 24px;
+            font-weight: 400;
+          }
+
+          p {
+            font-size: 16px;
+            color: #656565;
+          }
+        }
+
+        .donation-amount {
+          text-align: center;
+
+          label {
+            font-family: "Roboto", sans-serif;
+            font-weight: 400;
+            font-size: 16px;
+            color: #454342;
+          }
+
+          h3 {
+            font-family: "Poppins", sans-serif;
+            font-weight: 600;
+            font-size: 32px;
+          }
+        }
+
+        .actions-container {
+          .or-login {
+            &::before,
+            &::after {
+              width: 15% !important;
             }
           }
         }
