@@ -103,6 +103,15 @@ const ProfilePage = () => {
                 </h4>
                 <p>{userInfo.page_description}</p>
               </div>
+              {isLogged && (
+                <Button
+                  type="default"
+                  className="edit-btn"
+                  onClick={editingProfile}
+                >
+                  Edit Info.
+                </Button>
+              )}
             </div>
             <Goal donationMade={donationStatus} />
           </div>
