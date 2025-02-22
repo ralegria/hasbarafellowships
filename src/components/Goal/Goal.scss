@@ -10,25 +10,139 @@
 
     width: 100%;
     font-family: "Inter", sans-serif;
-  }
 
-  @media (min-width: 1440px) {
-    width: 30%;
-    .goal-container {
+    .goal-header {
+      color: #fff;
+      background-color: #1a427f;
+      padding: 24px 28px 24px;
+
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+
+      display: none;
+    }
+
+    .goal-body {
       display: flex;
       flex-direction: column;
+      gap: 24px;
 
-      width: 100%;
       font-family: "Inter", sans-serif;
 
+      .goal-form {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+
+        .goal-controls {
+          display: flex;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 12px;
+
+          width: 100%;
+        }
+      }
+
+      .goal-value {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+
+        .progress-container {
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+
+          .progress-amounts {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            .amount {
+              font-family: "poppins", sans-serif;
+              font-weight: 600;
+              font-size: 40px;
+            }
+
+            p {
+              font-family: "Inter", sans-serif;
+              font-size: 16px;
+
+              color: #454342;
+            }
+          }
+        }
+      }
+
+      .donate-table {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+
+        h5 {
+          font-family: "Inter", sans-serif;
+          font-size: 16px;
+          font-weight: 400;
+
+          color: #a0a0a0;
+        }
+
+        ul.amount-table {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          column-gap: 17px;
+          row-gap: 12px;
+
+          list-style: none;
+          padding: 0;
+
+          li {
+            border: 2px solid #c4c3c3;
+            text-align: center;
+            padding: 20px 0;
+            border-radius: 3px;
+
+            width: 100%;
+            cursor: pointer;
+
+            &.isSelected {
+              border-color: #153f71;
+              color: #153f71;
+            }
+
+            &:hover {
+              border-color: #153f71;
+              color: #153f71;
+            }
+          }
+        }
+
+        .donation-form {
+          .actions-container {
+            .or-login {
+              &::before,
+              &::after {
+                width: 12% !important;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 1024px) and (max-width: 1220px) {
+    width: 50%;
+  }
+
+  @media (min-width: 1220px) {
+    width: 40%;
+  }
+
+  @media (min-width: 1024px) {
+    width: 40%;
+    .goal-container {
       .goal-header {
-        color: #fff;
-        background-color: #1a427f;
-        padding: 24px 28px 24px;
-
-        border-top-left-radius: 8px;
-        border-top-right-radius: 8px;
-
         display: flex;
         flex-direction: row;
         gap: 10px;
@@ -40,12 +154,7 @@
       }
 
       .goal-body {
-        display: flex;
-        flex-direction: column;
-        gap: 24px;
-
         padding: 24px;
-        font-family: "Inter", sans-serif;
 
         border-left: 1px solid #c4c3c3;
         border-right: 1px solid #c4c3c3;
@@ -53,102 +162,11 @@
         border-bottom-left-radius: 8px;
         border-bottom-right-radius: 8px;
 
-        .goal-form {
-          display: flex;
-          flex-direction: column;
-          gap: 40px;
-
-          .goal-controls {
-            display: flex;
-            flex-direction: column;
-            align-items: stretch;
-            gap: 12px;
-
-            width: 100%;
-          }
-        }
-
         .goal-value {
-          display: flex;
-          flex-direction: column;
-          gap: 24px;
-
           .progress-container {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-
             .progress-amounts {
-              display: flex;
-              flex-direction: column;
-              gap: 4px;
               .amount {
-                font-family: "poppins", sans-serif;
-                font-weight: 600;
-                font-size: 47px;
-              }
-
-              p {
-                font-family: "Inter", sans-serif;
-                font-size: 16px;
-
-                color: #454342;
-              }
-            }
-          }
-        }
-
-        .donate-table {
-          display: flex;
-          flex-direction: column;
-          gap: 12px;
-
-          h5 {
-            font-family: "Inter", sans-serif;
-            font-size: 16px;
-            font-weight: 400;
-
-            color: #a0a0a0;
-          }
-
-          ul.amount-table {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            row-gap: 12px;
-            column-gap: 17px;
-
-            list-style: none;
-            padding: 0;
-
-            li {
-              border: 2px solid #c4c3c3;
-              text-align: center;
-              padding: 20px 0;
-              border-radius: 3px;
-
-              width: 29%;
-              cursor: pointer;
-
-              &.isSelected {
-                border-color: #153f71;
-                color: #153f71;
-              }
-
-              &:hover {
-                border-color: #153f71;
-                color: #153f71;
-              }
-            }
-          }
-
-          .donation-form {
-            .actions-container {
-              .or-login {
-                &::before,
-                &::after {
-                  width: 12% !important;
-                }
+                font-size: 40px;
               }
             }
           }

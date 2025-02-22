@@ -114,6 +114,12 @@ const ProfilePage = () => {
               )}
             </div>
             <Goal donationMade={donationStatus} />
+            <div className="title-name mobile">
+              <h1>{userInfo.page_title}</h1>
+              <h4>
+                by {userInfo.firstnames} {userInfo.lastnames}
+              </h4>
+            </div>
           </div>
         </>
       )}
