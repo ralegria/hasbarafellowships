@@ -1,3 +1,8 @@
+export const PROFILE_PLACEHOLDER_IMAGE =
+  "https://res.cloudinary.com/baygram/image/upload/v1740199037/profile_placeholder.jpg";
+export const COVER_PLACEHOLDER_IMAGE =
+  "https://res.cloudinary.com/baygram/image/upload/v1740199211/cover_image_placeholder.jpg";
+
 export const AMOUNT_PATTERNS = {
   PATTERN: /^(0(?!\.00)|[1-9]\d{0,6})(?:\.\d{1,2})?$/,
   PARSER: /\$\s?|(,*)/g,

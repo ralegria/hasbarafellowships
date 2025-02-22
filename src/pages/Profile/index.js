@@ -8,7 +8,11 @@ import useUI from "../../hooks/useUI";
 import ProfileEditPage from "./EditPage/ProfileEditPage";
 import SpinLoader from "../../layout/SpinLoader";
 import Goal from "../../components/Goal";
-import { LOCAL_STORAGE } from "../../consts";
+import {
+  COVER_PLACEHOLDER_IMAGE,
+  LOCAL_STORAGE,
+  PROFILE_PLACEHOLDER_IMAGE,
+} from "../../consts";
 
 import "./Profile.scss";
 
@@ -73,16 +77,16 @@ const ProfilePage = () => {
           <header
             className="cover-photo"
             style={{
-              ...(userInfo.cover_pic && {
-                background: `url(${userInfo.cover_pic}) no-repeat center center / cover`,
-              }),
+              background: `url(${
+                userInfo.cover_pic ?? COVER_PLACEHOLDER_IMAGE
+              }) no-repeat center center / cover`,
             }}
           />
           <div className="content">
             <div className="profile-info">
               <div className="header">
                 <img
-                  src={userInfo.profile_pic}
+                  src={userInfo.profile_pic ?? PROFILE_PLACEHOLDER_IMAGE}
                   className="profile-pic"
                   alt={userInfo.firstnames}
                 />

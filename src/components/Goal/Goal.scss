@@ -128,6 +128,58 @@
           }
         }
       }
+
+      .success-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 8px;
+        gap: 24px;
+
+        .donation-message {
+          display: flex;
+          flex-direction: column;
+          text-align: center;
+          gap: 10px;
+
+          h1 {
+            font-family: "Roboto", sans-serif;
+            font-size: 24px;
+            font-weight: 400;
+          }
+
+          p {
+            font-size: 16px;
+            color: #656565;
+          }
+        }
+
+        .donation-amount {
+          text-align: center;
+
+          label {
+            font-family: "Roboto", sans-serif;
+            font-weight: 400;
+            font-size: 16px;
+            color: #454342;
+          }
+
+          h3 {
+            font-family: "Poppins", sans-serif;
+            font-weight: 600;
+            font-size: 32px;
+          }
+        }
+
+        .actions-container {
+          .or-login {
+            &::before,
+            &::after {
+              width: 15% !important;
+            }
+          }
+        }
+      }
     }
   }
 
@@ -167,58 +219,6 @@
             .progress-amounts {
               .amount {
                 font-size: 40px;
-              }
-            }
-          }
-        }
-
-        .success-container {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          padding: 0 8px;
-          gap: 24px;
-
-          .donation-message {
-            display: flex;
-            flex-direction: column;
-            text-align: center;
-            gap: 10px;
-
-            h1 {
-              font-family: "Roboto", sans-serif;
-              font-size: 24px;
-              font-weight: 400;
-            }
-
-            p {
-              font-size: 16px;
-              color: #656565;
-            }
-          }
-
-          .donation-amount {
-            text-align: center;
-
-            label {
-              font-family: "Roboto", sans-serif;
-              font-weight: 400;
-              font-size: 16px;
-              color: #454342;
-            }
-
-            h3 {
-              font-family: "Poppins", sans-serif;
-              font-weight: 600;
-              font-size: 32px;
-            }
-          }
-
-          .actions-container {
-            .or-login {
-              &::before,
-              &::after {
-                width: 15% !important;
               }
             }
           }

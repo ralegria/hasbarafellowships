@@ -71,6 +71,8 @@
           height: 175px;
           border-radius: 8px;
           border: 1px solid #ededed;
+
+          object-fit: cover;
         }
 
         .edit-btn {
@@ -167,7 +169,7 @@
         width: 70%;
 
         .edit-btn {
-          display: block;
+          display: none;
         }
 
         .header {
