@@ -146,7 +146,7 @@ const ProfileEditPage = () => {
               <Button type="default" onClick={editingProfile}>
                 Cancel
               </Button>
-              <Button type="primary" className="edit-btn" htmlType="submit">
+              <Button type="primary" htmlType="submit">
                 Save info
               </Button>
             </div>

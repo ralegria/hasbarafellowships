@@ -23,7 +23,11 @@
     align-items: center;
     justify-content: center;
 
-    height: 500px;
+    height: 200px;
+
+    @media (min-width: 1440px) {
+      height: 500px;
+    }
 
     .cover-btn {
       position: absolute;

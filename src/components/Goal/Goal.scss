@@ -95,6 +95,7 @@
 
           list-style: none;
           padding: 0;
+          width: 100%;
 
           li {
             border: 2px solid #c4c3c3;
@@ -192,7 +193,7 @@
   }
 
   @media (min-width: 1024px) {
-    width: 40%;
+    width: 30%;
     .goal-container {
       .goal-header {
         display: flex;
