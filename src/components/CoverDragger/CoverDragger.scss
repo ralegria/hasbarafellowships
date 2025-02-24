@@ -41,6 +41,9 @@
       position: absolute;
       bottom: 24px;
       right: 120px;
+      @media (max-width: 1024px) {
+        display: none;
+      }
     }
 
     .logout-btn {
