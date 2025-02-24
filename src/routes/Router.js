@@ -1,11 +1,11 @@
-import { BrowserRouter, Routes, Route } from "react-router";
+import { HashRouter, Routes, Route } from "react-router";
 
 import HomePage from "../pages/Home";
 import ProfilePage from "../pages/Profile";
 
 const Router = () => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       {/* <BrowserRouter basename="/students-fundraising-program"> */}
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -17,7 +17,7 @@ const Router = () => {
           element={<ProfilePage donationMade />}
         />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
