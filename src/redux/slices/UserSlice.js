@@ -1,7 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   isLogged: false,
-  info: {},
+  info: {
+    editing_cover_pic: null,
+    editing_profile_pic: null,
+  },
   goal: {
     collected: 0,
     expected: 0,

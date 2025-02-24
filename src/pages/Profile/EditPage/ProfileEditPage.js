@@ -27,15 +27,29 @@ const ProfileEditPage = () => {
     setUserInfo({ ...userInfo, ...changedValues });
   };
 
-  const onProfileUploadChange = (url) => {
-    setUserInfo({ ...userInfo, profile_pic: url });
-  };
-
-  const onCoverUploadChange = (url) => {
-    setUserInfo({ ...userInfo, cover_pic: url });
+  const onCancelClicked = () => {
+    if (userInfo.editing_profile_pic || userInfo.editing_cover_pic) {
+      setUserInfo({
+        ...(userInfo.editing_profile_pic && {
+          profile_pic: userInfo.editing_profile_pic,
+        }),
+        ...(userInfo.editing_cover_pic && {
+          cover_pic: userInfo.editing_cover_pic,
+        }),
+        editing_profile_pic: null,
+        editing_cover_pic: null,
+      });
+    }
+    editingProfile();
   };
 
   const onProfileSave = async () => {
+    setUserInfo({
+      ...userInfo,
+      editing_profile_pic: null,
+      editing_cover_pic: null,
+    });
+
     try {
       const response = await axiosRequest.put(
         process.env.REACT_APP_API_URL + `/users/${userID}`,
@@ -125,10 +139,7 @@ const ProfileEditPage = () => {
   ];
   return (
     <div className="profile-edit-page">
-      <CoverDragger
-        cover_pic={userInfo.cover_pic}
-        onUploadChange={onCoverUploadChange}
-      />
+      <CoverDragger />
       <div className="content">
         <Form
           layout="vertical"
@@ -138,12 +149,9 @@ const ProfileEditPage = () => {
           onFinish={onProfileSave}
         >
           <div className="avatar-n-controls">
-            <ProfileUploader
-              photo_saved={userInfo.profile_pic}
-              onUploadChange={onProfileUploadChange}
-            />
+            <ProfileUploader />
             <div className="controls">
-              <Button type="default" onClick={editingProfile}>
+              <Button type="default" onClick={onCancelClicked}>
                 Cancel
               </Button>
               <Button type="primary" htmlType="submit">

@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
 import { CameraOutlined, EditFilled, LoadingOutlined } from "@ant-design/icons";
 import { Button, Spin } from "antd";
 
@@ -8,23 +7,21 @@ import Dragger from "antd/es/upload/Dragger";
 
 import "./CoverDragger.scss";
 
-const CoverDragger = ({ cover_pic = null, onUploadChange }) => {
+const CoverDragger = () => {
   const sectionName = "cover-dragger";
-  const [coverPhotoUrl, setCoverPhotoUrl] = useState(cover_pic);
-  const { loading, finishLoading, SectionIsLoading } = useUI();
+  const { loading, finishLoading, SectionIsLoading, setUserInfo, userInfo } =
+    useUI();
+
+  const coverPhoto = userInfo.cover_pic;
 
   const isLoading = SectionIsLoading(sectionName);
-
-  useEffect(() => {
-    setCoverPhotoUrl(cover_pic);
-  }, [cover_pic]);
 
   return (
     <header
       className="cover-dragger"
       style={{
-        ...(coverPhotoUrl && {
-          background: `url(${coverPhotoUrl}) no-repeat center center / cover`,
+        ...(coverPhoto && {
+          background: `url(${coverPhoto}) no-repeat center center / cover`,
         }),
       }}
     >
@@ -39,16 +36,19 @@ const CoverDragger = ({ cover_pic = null, onUploadChange }) => {
           loading(sectionName);
 
           formData.append("file", file.file);
-          formData.append("upload_preset", "iuj87bk5");
+          formData.append(
+            "upload_preset",
+            process.env.REACT_APP_CLOUDINARY_PRESET
+          );
           axios
-            .post(
-              "https://api.cloudinary.com/v1_1/baygram/image/upload",
-              formData
-            )
+            .post(process.env.REACT_APP_CLOUDINARY_API, formData)
             .then((response) => {
-              setCoverPhotoUrl(response.data.secure_url);
-              onUploadChange(response.data.secure_url);
-              file.onSuccess(response.data.secure_url);
+              const newCover = response.data.secure_url;
+              setUserInfo({
+                editing_cover_pic: userInfo.cover_pic,
+                cover_pic: newCover,
+              });
+              file.onSuccess(newCover);
             })
             .catch((error) => {
               console.error(error);
@@ -59,7 +59,7 @@ const CoverDragger = ({ cover_pic = null, onUploadChange }) => {
             });
         }}
       >
-        {coverPhotoUrl && (
+        {coverPhoto && (
           <>
             {!isLoading && <EditFilled className="edit-icon" />}
             {isLoading && (
@@ -71,9 +71,9 @@ const CoverDragger = ({ cover_pic = null, onUploadChange }) => {
             )}
           </>
         )}
-        {!coverPhotoUrl && <CameraOutlined className="camera-icon" />}
+        {!coverPhoto && <CameraOutlined className="camera-icon" />}
         <Button type="default" className="cover-btn" loading={isLoading}>
-          {coverPhotoUrl ? "Edit" : "Add"} cover photo
+          {coverPhoto ? "Edit" : "Add"} cover photo
         </Button>
       </Dragger>
     </header>

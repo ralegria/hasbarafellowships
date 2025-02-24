@@ -1,14 +1,15 @@
 import axios from "axios";
-import { useState } from "react";
 import { CameraOutlined, EditFilled, LoadingOutlined } from "@ant-design/icons";
 import { Button, Spin, Upload } from "antd";
 
 import useUI from "../../hooks/useUI";
 
-const ProfileUploader = ({ photo_saved, onUploadChange }) => {
+const ProfileUploader = () => {
   const sectionName = "profile-uploader";
-  const [profilePicUrl, setProfilePicUrl] = useState(photo_saved);
-  const { loading, finishLoading, SectionIsLoading } = useUI();
+  const { loading, finishLoading, SectionIsLoading, setUserInfo, userInfo } =
+    useUI();
+
+  const loaded_photo = userInfo.profile_pic;
   const isLoading = SectionIsLoading(sectionName);
 
   return (
@@ -22,16 +23,19 @@ const ProfileUploader = ({ photo_saved, onUploadChange }) => {
         const formData = new FormData();
         loading(sectionName);
         formData.append("file", file.file);
-        formData.append("upload_preset", "iuj87bk5");
+        formData.append(
+          "upload_preset",
+          process.env.REACT_APP_CLOUDINARY_PRESET
+        );
         axios
-          .post(
-            "https://api.cloudinary.com/v1_1/baygram/image/upload",
-            formData
-          )
+          .post(process.env.REACT_APP_CLOUDINARY_API, formData)
           .then((response) => {
-            setProfilePicUrl(response.data.secure_url);
-            onUploadChange(response.data.secure_url);
-            file.onSuccess(response.data.secure_url);
+            const newImage = response.data.secure_url;
+            setUserInfo({
+              editing_profile_pic: userInfo.profile_pic,
+              profile_pic: newImage,
+            });
+            file.onSuccess(newImage);
           })
           .catch((error) => {
             console.error(error);
@@ -42,11 +46,11 @@ const ProfileUploader = ({ photo_saved, onUploadChange }) => {
           });
       }}
     >
-      {profilePicUrl ? (
+      {loaded_photo ? (
         <div
           className="photo-edit-container"
           style={{
-            background: `url(${profilePicUrl}) no-repeat center center / cover`,
+            background: `url(${loaded_photo}) no-repeat center center / cover`,
           }}
         >
           {!isLoading ? (
