@@ -23,12 +23,27 @@
     align-items: center;
     justify-content: center;
 
-    height: 500px;
+    height: 200px;
+
+    @media (min-width: 1440px) {
+      height: 500px;
+    }
+
+    .edit-icon {
+      color: white;
+      background-color: rgba(0, 0, 0, 0.46);
+
+      border-radius: 12px;
+      padding: 24px;
+    }
 
     .cover-btn {
       position: absolute;
       bottom: 24px;
       right: 120px;
+      @media (max-width: 1024px) {
+        display: none;
+      }
     }
 
     .logout-btn {
@@ -37,7 +52,16 @@
       right: 120px;
     }
 
-    svg {
+    .loading-icon {
+      color: white;
+      background-color: rgba(0, 0, 0, 0.46);
+
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .camera-icon svg,
+    .edit-icon svg {
       width: 40px;
       height: 40px;
     }

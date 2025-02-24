@@ -1,7 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   isLogged: false,
-  info: {},
+  info: {
+    editing_cover_pic: null,
+    editing_profile_pic: null,
+  },
   goal: {
     collected: 0,
     expected: 0,
@@ -22,7 +25,7 @@ export const UserSlice = createSlice({
       state.goal = {
         ...state.goal,
         ...action.payload,
-        percentage: state.goal.collected / state.goal.expected,
+        percentage: (state.goal.collected / state.goal.expected) * 100,
       };
     },
     setEmptyGoal: (state) => {

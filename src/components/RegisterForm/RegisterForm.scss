@@ -2,23 +2,14 @@
   display: flex;
   flex-direction: column;
 
-  width: 30%;
   font-family: "Inter", sans-serif;
 
-  position: sticky;
-  top: 100px;
-
   .register-header {
-    color: #fff;
-    background-color: #1a427f;
-    padding: 24px 28px 24px;
-
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
+    color: #1a427f;
 
     h4 {
-      font-size: 18.2px;
-      font-weight: 400;
+      font-size: 24px;
+      font-weight: 600;
     }
   }
 
@@ -27,20 +18,15 @@
     flex-direction: column;
     gap: 24px;
 
-    padding: 24px;
     font-family: "Inter", sans-serif;
 
-    border-left: 1px solid #c4c3c3;
-    border-right: 1px solid #c4c3c3;
-    border-bottom: 1px solid #c4c3c3;
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
+    padding-top: 4px;
 
     h5 {
-      font-size: 20px;
+      font-size: 16px;
       font-weight: 400;
 
-      color: #002855;
+      color: #8f8f8f;
     }
 
     p {
@@ -49,35 +35,67 @@
       color: #8f8f8f;
     }
 
-    .form-container {
-      .form {
-        .actions-container {
-          display: flex;
-          flex-direction: column;
-          align-items: stretch;
-          gap: 16px;
+    .actions-container {
+      span.or-login {
+        &::before,
+        &::after {
+          width: 10%;
+        }
+      }
+    }
+  }
 
-          padding-top: 12px;
-          width: 100%;
+  @media screen and (min-width: 425px) and (max-width: 768px) {
+    .actions-container {
+      span.or-login {
+        &::before,
+        &::after {
+          width: 22% !important;
+        }
+      }
+    }
+  }
 
-          span.or-login {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            text-align: center;
-            justify-content: space-between;
+  @media (min-width: 1024px) {
+    width: 40%;
+    .register-header {
+      color: #fff;
+      background-color: #1a427f;
+      padding: 24px 28px 24px;
 
-            font-size: 12px;
-            color: #949494;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
 
-            &::before,
-            &::after {
-              content: "";
-              display: block;
-              width: 20%;
-              height: 0px;
-              border: 1px solid #c4c3c3;
-            }
+      h4 {
+        font-size: 18.5px;
+        font-weight: 400;
+      }
+    }
+
+    .register-body {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+
+      padding: 24px;
+      font-family: "Inter", sans-serif;
+
+      border-left: 1px solid #c4c3c3;
+      border-right: 1px solid #c4c3c3;
+      border-bottom: 1px solid #c4c3c3;
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+
+      h5 {
+        font-size: 20px;
+        color: #002855;
+      }
+
+      .actions-container {
+        span.or-login {
+          &::before,
+          &::after {
+            width: 20%;
           }
         }
       }

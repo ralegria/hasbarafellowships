@@ -1,26 +1,93 @@
-import { Form, InputNumber } from "antd";
-import { AMOUNT_PATTERNS } from "../../consts";
+import cn from "classnames";
+import axiosRequest from "../../axiosInterceptor";
 
+import { Button, Form, InputNumber } from "antd";
+import { AMOUNT_PATTERNS, MESSAGES } from "../../consts";
+
+import CopyLinkBtn from "./CopyLinkBtn";
 import CustomForm from "../CustomForm";
+import useUI from "../../hooks/useUI";
+
+import { toCents } from "../../utils";
 
 const DonateTable = () => {
+  const sectionName = "donation-table";
   const amounts = [25, 50, 100, 250, 500, 1000];
+  const [form] = Form.useForm();
+
+  const {
+    loading,
+    setNewAlert,
+    clearAlerts,
+    setDonation,
+    finishLoading,
+    SectionIsLoading,
+    donationAmount,
+    userInfo,
+  } = useUI();
+
+  const isLoading = SectionIsLoading(sectionName);
 
   const onDonationSelected = (amount) => {
-    alert(`You have donated $${amount}`);
+    form.resetFields();
+    setDonation(toCents(amount));
   };
+
+  const onCustomDonation = ({ amount_donated }) => {
+    setDonation(toCents(amount_donated));
+  };
+
+  const onDonateClicked = async () => {
+    try {
+      clearAlerts();
+      loading(sectionName);
+      const generatedPaymentURL = await axiosRequest.post(
+        "/donations/generate",
+        {
+          user_id: userInfo.id,
+          amount_donated: donationAmount,
+          cancel_url: `${process.env.REACT_APP_BASE_URL}/#/${userInfo.id}`,
+          success_url: `${process.env.REACT_APP_BASE_URL}/#/${userInfo.id}/donation/success`,
+        }
+      );
+
+      if (generatedPaymentURL.status !== 200) {
+        throw new Error("Error generating payment URL");
+      }
+
+      finishLoading();
+      window.location.href = generatedPaymentURL.data.url;
+    } catch (error) {
+      console.log(error);
+
+      finishLoading(() =>
+        setNewAlert({ type: "error", message: MESSAGES.DONATE.ERROR })
+      );
+    }
+  };
+
   return (
     <div className="donate-table">
       <h5>Choose an amount to donate!</h5>
       <ul className="amount-table">
-        {amounts.map((amount) => (
-          <li onClick={() => onDonationSelected(amount)}>${amount}</li>
-        ))}
+        {amounts.map((amount) => {
+          const isSelected = donationAmount === toCents(amount);
+          return (
+            <li
+              className={cn(null, { isSelected })}
+              onClick={() => onDonationSelected(amount)}
+            >
+              ${amount}
+            </li>
+          );
+        })}
       </ul>
       <CustomForm
+        form={form}
         layout="vertical"
         className="donation-form"
-        onFinish={() => {}}
+        onValuesChange={onCustomDonation}
+        onFinish={onDonateClicked}
       >
         <Form.Item
           label="Custom Amount"
@@ -41,6 +108,20 @@ const DonateTable = () => {
             }
           />
         </Form.Item>
+        <div className="actions-container">
+          <Button
+            type="primary"
+            onClick={onDonateClicked}
+            loading={isLoading}
+            disabled={donationAmount === 0}
+          >
+            Donate
+          </Button>
+          <span className="or-login">
+            Can’t donate now? Share this page with friends to help!
+          </span>
+          <CopyLinkBtn />
+        </div>
       </CustomForm>
     </div>
   );

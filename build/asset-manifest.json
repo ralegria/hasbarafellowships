@@ -1,14 +1,10 @@
 {
   "files": {
-    "main.css": "/static/css/main.56ea95be.css",
-    "main.js": "/static/js/main.9eaf5d66.js",
-    "static/media/signup-banner.png": "/static/media/signup-banner.cb6453d3fc1aa67e271f.png",
+    "main.css": "/static/css/main.ccb9161a.css",
+    "main.js": "/static/js/main.2c3388a9.js",
     "index.html": "/index.html",
-    "main.56ea95be.css.map": "/static/css/main.56ea95be.css.map",
-    "main.9eaf5d66.js.map": "/static/js/main.9eaf5d66.js.map"
+    "main.ccb9161a.css.map": "/static/css/main.ccb9161a.css.map",
+    "main.2c3388a9.js.map": "/static/js/main.2c3388a9.js.map"
   },
-  "entrypoints": [
-    "static/css/main.56ea95be.css",
-    "static/js/main.9eaf5d66.js"
-  ]
+  "entrypoints": ["static/css/main.ccb9161a.css", "static/js/main.2c3388a9.js"]
 }

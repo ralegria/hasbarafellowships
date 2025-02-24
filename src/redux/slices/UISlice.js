@@ -17,11 +17,16 @@ const UISlice = createSlice({
   name: "UISlice",
   initialState,
   reducers: {
-    switchLoading: (state, action) => {
+    isLoading: (state, action) => {
       state.loading = {
-        section: action?.payload?.section ?? initialState.loading.section,
-        isLoading: !state.loading.isLoading,
+        section: action?.payload?.section
+          ? action?.payload?.section
+          : initialState.loading.section,
+        isLoading: true,
       };
+    },
+    finishLoading: (state) => {
+      state.loading = initialState.loading;
     },
     switchProfileEditMode: (state) => {
       state.profileEditMode = !state.profileEditMode;
@@ -37,7 +42,8 @@ const UISlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const {
-  switchLoading,
+  isLoading,
+  finishLoading,
   switchProfileEditMode,
   switchGoalEditMode,
   setNewFormAlert,

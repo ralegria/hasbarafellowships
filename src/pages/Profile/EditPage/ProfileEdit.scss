@@ -1,61 +1,118 @@
 .profile-edit-page {
+  .content {
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+  }
+
   &.loading {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
   }
-  .content {
-    display: flex;
-    flex-direction: row;
-    gap: 100px;
 
-    padding: 40px 120px;
+  .profile-info {
+    position: relative;
+    padding-bottom: 60px;
+    .avatar-n-controls {
+      width: 100%;
 
-    .profile-info {
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      gap: 32px;
+      .avatar-uploader {
+        width: 175px;
+        height: 175px;
 
-      width: 70%;
+        .photo-edit-container {
+          display: flex;
+          align-items: center;
+          justify-content: center;
 
-      .avatar-n-controls {
-        display: flex;
-        flex-direction: row;
-        align-items: flex-start;
-        justify-content: space-between;
-
-        width: 100%;
-
-        .avatar-uploader {
           width: 175px;
           height: 175px;
+          border-radius: 8px;
 
-          svg {
-            width: 40px;
-            height: 40px;
-          }
+          .edit-icon,
+          .loading-icon {
+            color: white;
+            background-color: rgba(0, 0, 0, 0.46);
 
-          .ant-upload-select {
-            width: 100%;
-            height: 100%;
-
-            img {
-              border-radius: 8px;
-            }
+            border-radius: 12px;
+            padding: 24px;
           }
         }
 
-        .controls {
-          display: flex;
-          flex-direction: row;
-          gap: 8px;
+        .edit-icon svg,
+        .camara-icon svg {
+          width: 40px;
+          height: 40px;
+        }
+
+        .ant-upload-select {
+          width: 100%;
+          height: 100%;
+
+          img {
+            border-radius: 8px;
+          }
         }
       }
 
-      .info {
+      .controls {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        z-index: 100;
+
+        background-color: white;
         width: 100%;
+
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        .ant-btn {
+          border-radius: 0;
+          height: 70px;
+        }
+      }
+    }
+
+    .info {
+      width: 100%;
+
+      textarea {
+        height: 250px;
+      }
+    }
+  }
+
+  @media (min-width: 1440px) {
+    .content {
+      display: flex;
+      flex-direction: row;
+      gap: 100px;
+
+      padding: 40px 120px;
+
+      .profile-info {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 32px;
+
+        width: 70%;
+
+        .avatar-n-controls {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          .controls {
+            position: relative !important;
+            width: fit-content;
+            display: flex;
+            flex-direction: row;
+            gap: 8px;
+          }
+        }
       }
     }
   }

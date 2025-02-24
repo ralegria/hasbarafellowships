@@ -50,6 +50,10 @@ ul {
     background: #153f71;
     color: #fff;
   }
+
+  &:disabled {
+    background: #9fbcdf;
+  }
 }
 
 ol {
@@ -129,6 +133,36 @@ ol {
           }
         }
       }
+    }
+  }
+}
+
+.actions-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 16px;
+
+  padding-top: 12px;
+  width: 100%;
+
+  span.or-login {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+
+    font-size: 12px;
+    color: #949494;
+
+    &::before,
+    &::after {
+      content: "";
+      display: block;
+      width: 20%;
+      height: 0px;
+      border: 1px solid #c4c3c3;
     }
   }
 }
