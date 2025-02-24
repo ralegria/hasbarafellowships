@@ -1,18 +1,26 @@
 import axios from "axios";
 import { useState } from "react";
-import { CameraOutlined } from "@ant-design/icons";
-import { Button, Upload } from "antd";
+import { CameraOutlined, EditFilled, LoadingOutlined } from "@ant-design/icons";
+import { Button, Spin, Upload } from "antd";
+
+import useUI from "../../hooks/useUI";
 
 const ProfileUploader = ({ photo_saved, onUploadChange }) => {
+  const sectionName = "profile-uploader";
   const [profilePicUrl, setProfilePicUrl] = useState(photo_saved);
+  const { loading, finishLoading, SectionIsLoading } = useUI();
+  const isLoading = SectionIsLoading(sectionName);
+
   return (
     <Upload
       className="avatar-uploader"
       listType="picture-card"
       showUploadList={false}
       multiple={false}
+      disabled={isLoading}
       customRequest={(file) => {
         const formData = new FormData();
+        loading(sectionName);
         formData.append("file", file.file);
         formData.append("upload_preset", "iuj87bk5");
         axios
@@ -28,22 +36,32 @@ const ProfileUploader = ({ photo_saved, onUploadChange }) => {
           .catch((error) => {
             console.error(error);
             file.onError(error);
+          })
+          .finally(() => {
+            finishLoading();
           });
       }}
     >
       {profilePicUrl ? (
-        <img
-          src={profilePicUrl}
-          alt="avatar"
+        <div
+          className="photo-edit-container"
           style={{
-            height: "100%",
-            width: "100%",
-            objectFit: "cover",
+            background: `url(${profilePicUrl}) no-repeat center center / cover`,
           }}
-        />
+        >
+          {!isLoading ? (
+            <EditFilled className="edit-icon" />
+          ) : (
+            <Spin
+              size="large"
+              className="loading-icon"
+              indicator={<LoadingOutlined spin />}
+            />
+          )}
+        </div>
       ) : (
         <Button type="button">
-          <CameraOutlined />
+          <CameraOutlined className="camara-icon" />
         </Button>
       )}
     </Upload>

@@ -1,14 +1,19 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { CameraOutlined } from "@ant-design/icons";
-import { Button } from "antd";
+import { CameraOutlined, EditFilled, LoadingOutlined } from "@ant-design/icons";
+import { Button, Spin } from "antd";
 
+import useUI from "../../hooks/useUI";
 import Dragger from "antd/es/upload/Dragger";
 
 import "./CoverDragger.scss";
 
 const CoverDragger = ({ cover_pic = null, onUploadChange }) => {
+  const sectionName = "cover-dragger";
   const [coverPhotoUrl, setCoverPhotoUrl] = useState(cover_pic);
+  const { loading, finishLoading, SectionIsLoading } = useUI();
+
+  const isLoading = SectionIsLoading(sectionName);
 
   useEffect(() => {
     setCoverPhotoUrl(cover_pic);
@@ -26,10 +31,13 @@ const CoverDragger = ({ cover_pic = null, onUploadChange }) => {
       <div className="overlay" />
       <Dragger
         multiple={false}
+        disabled={isLoading}
         showUploadList={false}
         className="cover-photo-dragger"
         customRequest={(file) => {
           const formData = new FormData();
+          loading(sectionName);
+
           formData.append("file", file.file);
           formData.append("upload_preset", "iuj87bk5");
           axios
@@ -45,12 +53,27 @@ const CoverDragger = ({ cover_pic = null, onUploadChange }) => {
             .catch((error) => {
               console.error(error);
               file.onError(error);
+            })
+            .finally(() => {
+              finishLoading();
             });
         }}
       >
-        {!coverPhotoUrl && <CameraOutlined />}
-        <Button type="default" className="cover-btn">
-          Add cover photo
+        {coverPhotoUrl && (
+          <>
+            {!isLoading && <EditFilled className="edit-icon" />}
+            {isLoading && (
+              <Spin
+                size="large"
+                className="loading-icon"
+                indicator={<LoadingOutlined spin />}
+              />
+            )}
+          </>
+        )}
+        {!coverPhotoUrl && <CameraOutlined className="camera-icon" />}
+        <Button type="default" className="cover-btn" loading={isLoading}>
+          {coverPhotoUrl ? "Edit" : "Add"} cover photo
         </Button>
       </Dragger>
     </header>
