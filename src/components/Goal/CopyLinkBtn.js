@@ -10,7 +10,7 @@ const CopyLinkBtn = () => {
   const isLoading = SectionIsLoading(sectionName);
 
   const handleCopyClick = async () => {
-    const currentLink = `${process.env.REACT_APP_BASE_URL}/${userInfo.id}`;
+    const currentLink = `${process.env.REACT_APP_BASE_URL}/#/${userInfo.id}`;
     try {
       loading(sectionName);
       await navigator.clipboard.writeText(currentLink);
