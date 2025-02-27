@@ -97,28 +97,28 @@ const ProfileEditPage = () => {
       children: (
         <>
           <Form.Item
-            label="First Names"
+            label="First Name"
             name="firstnames"
             rules={[
               {
                 required: true,
-                message: "Please input your First Names",
+                message: "Please input your First Name",
               },
             ]}
           >
-            <Input placeholder="Your First Names" />
+            <Input placeholder="Your First Name" />
           </Form.Item>
           <Form.Item
-            label="Last Names"
+            label="Last Name"
             name="lastnames"
             rules={[
               {
                 required: true,
-                message: "Please input your Last Names",
+                message: "Please input your Last Name",
               },
             ]}
           >
-            <Input placeholder="Your Last Names" />
+            <Input placeholder="Your Last Name" />
           </Form.Item>
           <Form.Item
             label="Email"
