@@ -13,52 +13,62 @@ const HomePage = ({ login = false }) => {
       <div className="content">
         <div className="info">
           <div className="info-col">
-            <h2>Want to Stand for Israel and Fight Antisemitism on Campus?</h2>
+            <h2>
+              Are You a Student Passionate About Defending Israel and Combating
+              Antisemitism?
+            </h2>
             <p>
-              Are you a student passionate about defending Israel, combating
-              antisemitism, and becoming a leader in your community? Hasbara
-              Fellowships offers you the opportunity to experience Israel
-              firsthand and gain the tools you need to advocate effectively on
-              your campus. But we understand that the cost of travel can be a
-              challenge. That’s why we’ve created the Student Fundraising
-              Program—a personalized micro-funding platform to help you turn
-              your dream of visiting Israel into a reality. Let your voice be
-              heard, inspire your community, and raise the support you need to
-              embark on this transformative journey.
+              Hasbara Fellowships gives you the opportunity to experience Israel
+              firsthand and gain the tools to become a leader on your campus.
+              But we know that funding your trip can be a challenge.
+              <br />
+              <br />
+              That’s why we created the Student Fundraising Program—a
+              personalized micro-funding platform that empowers you to turn your
+              dream of visiting Israel into reality.
+              <br />
+              <br />
+              Raise the support you need, amplify your voice, and inspire your
+              community to stand with Israel.
             </p>
           </div>
           <div className="info-col">
-            <h3>Steps to Get Started:</h3>
+            <h3>How It Works</h3>
             <ol>
               <li>
                 <div>
                   <b>Register for the Program:</b> Sign up with your name,
-                  email, and college details to begin your fundraising journey.
+                  email, and college details to start your fundraising journey.
                 </div>
               </li>
               <li>
                 <div>
-                  <b>Create Your Profile:</b> Personalize your fundraising page
-                  by uploading your photo, sharing your story, and setting a
-                  fundraising goal. Tell others why you’re passionate about
-                  standing with Israel and how this trip will empower you to
-                  make a difference.
+                  <b>Create Your Profile:</b> Personalize your fundraising
+                  page—upload a photo, share your story, and set a fundraising
+                  goal. Tell the world why this trip matters and how it will
+                  empower you to make an impact.
                 </div>
               </li>
               <li>
                 <div>
-                  <b>Share Your Profile:</b> Spread the word! Share the unique
-                  URL of your profile with family, friends, and your community
-                  to rally support for your trip.
+                  <b>Share Your Campaign:</b> Spread the word! Share your unique
+                  profile link with family, friends, and your community to rally
+                  support.
                 </div>
               </li>
               <li>
                 <div>
-                  <b>Receive Donations:</b> Supporters can visit your profile,
-                  enter their name and email, and contribute to your campaign
-                  securely. Disclaimer: All funds raised will be managed by
-                  Hasbara Fellowships and allocated directly to cover your trip
-                  expenses, ensuring your journey is fully funded.
+                  <b>Receive Secure Donations:</b> Supporters can donate
+                  directly through your profile, ensuring all contributions go
+                  toward funding your trip.
+                  <br />
+                  <br />
+                  💡{" "}
+                  <i>
+                    100% of the funds raised will be managed by Hasbara
+                    Fellowships and allocated directly to cover your travel
+                    expenses.
+                  </i>
                 </div>
               </li>
             </ol>
@@ -69,17 +79,20 @@ const HomePage = ({ login = false }) => {
               Empowering Voices, Building Impact
               <br />
               <br />
-              Welcome to Hasbara Fellowships’ Student Fundraising Program, a
-              dynamic platform designed to empower passionate leaders like you
-              to make a difference. By joining, you’ll not only create a
-              personal profile to share your journey but also inspire others to
-              support your mission of standing against antisemitism and
-              advocating for Israel on campus. Through this program, you’ll gain
-              the tools to effectively raise funds for your transformative
-              Israel experience, where firsthand learning and leadership
-              development equip you to become a strong voice for truth and
-              justice. Together, let’s build a future of understanding,
-              resilience, and impact.
+              The Hasbara Fellowships Student Fundraising Program is a
+              game-changing platform designed to empower student leaders like
+              you to make a difference. By joining, you’ll not only raise the
+              funds needed for your trip but also inspire others to stand
+              against antisemitism and advocate for Israel on campus.
+              <br />
+              <br />
+              This experience will equip you with the firsthand knowledge,
+              leadership skills, and confidence to become a powerful voice for
+              truth and justice.
+              <br />
+              <br />
+              Together, let’s build a future of resilience, education, and
+              impact.
             </p>
           </div>
         </div>
