@@ -34,6 +34,8 @@ const DonateTable = () => {
   };
 
   const onCustomDonation = ({ amount_donated }) => {
+    //console.log(toCents(amount_donated));
+
     setDonation(toCents(amount_donated));
   };
 

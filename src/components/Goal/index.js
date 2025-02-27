@@ -12,6 +12,7 @@ import DonateTable from "./DonateTable";
 import SuccessView from "./SuccessView";
 
 import "./Goal.scss";
+import CopyLinkBtn from "./CopyLinkBtn";
 
 const Goal = ({ donationMade = null }) => {
   const navigate = useNavigate();
@@ -129,9 +130,15 @@ const Goal = ({ donationMade = null }) => {
                       />
                     </div>
                     {isLogged && (
-                      <Button type="primary" onClick={editingGoal}>
-                        Edit goal
-                      </Button>
+                      <div className="actions-container">
+                        <Button type="primary" onClick={editingGoal}>
+                          Edit goal
+                        </Button>
+                        <span className="or-login">
+                          Share your campaing with the world!
+                        </span>
+                        <CopyLinkBtn />
+                      </div>
                     )}
                   </div>
                 )}

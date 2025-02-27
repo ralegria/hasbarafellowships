@@ -36,31 +36,31 @@ export const REGISTER_FORM_CONFIG = {
     title: "Tell us more about you.",
     fields: [
       {
-        label: "First Names",
+        label: "First Name",
         name: "firstnames",
         type: "input",
         rules: [
           {
             required: true,
-            message: "Please enter your first names",
+            message: "Please enter your first name",
           },
         ],
         input: {
-          placeholder: "Your First Names",
+          placeholder: "Your First Name",
         },
       },
       {
-        label: "Last Names",
+        label: "Last Name",
         name: "lastnames",
         type: "input",
         rules: [
           {
             required: true,
-            message: "Please enter your last names",
+            message: "Please enter your last name",
           },
         ],
         input: {
-          placeholder: "Your Last Names",
+          placeholder: "Your Last Name",
         },
       },
       {
