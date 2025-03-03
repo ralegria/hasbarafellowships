@@ -146,6 +146,17 @@ ol {
   padding-top: 12px;
   width: 100%;
 
+  .ant-btn {
+    &:has(a) {
+      padding: 0;
+    }
+
+    a {
+      width: 100%;
+      padding: 17px 24px;
+    }
+  }
+
   span.or-login {
     display: flex;
     flex-direction: row;
