@@ -1,4 +1,4 @@
-import axios from "axios";
+import axiosRequest from "../../axiosInterceptor";
 import { useState } from "react";
 import { Form, Input, Button } from "antd";
 import { Link, useNavigate } from "react-router";
@@ -10,11 +10,14 @@ import {
 } from "../../consts";
 
 import "./RegisterForm.scss";
+import CustomForm from "../CustomForm";
+import useUI from "../../hooks/useUI";
 
-const { GENERAL_INFO, VERIFICATION, PASSWORD } = REGISTER_FORM_STEPS;
+const { GENERAL_INFO, PASSWORD } = REGISTER_FORM_STEPS;
 
 const RegisterForm = () => {
   const navigate = useNavigate();
+  const { setNewAlert, clearAlerts } = useUI();
   const [CURRENT_STEP, setCURRENT_STEP] = useState(GENERAL_INFO);
   const [formData, setFormData] = useState({});
   const stepTitle = REGISTER_FORM_CONFIG[CURRENT_STEP].title;
@@ -23,21 +26,21 @@ const RegisterForm = () => {
 
   const createAccount = async () => {
     try {
-      const response = await axios.post(
-        process.env.REACT_APP_API_URL + "/users",
-        { ...formData, role_id: 2 }
-      );
+      const response = await axiosRequest.post("/users", {
+        ...formData,
+        role_id: 2,
+      });
 
       if (response.status === 201) {
         const { data, token } = response.data;
         localStorage.setItem(
           LOCAL_STORAGE.TOKEN,
           JSON.stringify({
-            userId: data.id,
+            userId: data.short_id,
             token,
           })
         );
-        navigate(`/${data.id}`);
+        navigate(`/${data.short_id}`);
       }
     } catch (error) {
       console.log(error);
@@ -48,11 +51,33 @@ const RegisterForm = () => {
     setFormData({ ...formData, ...changedValues });
   };
 
-  const onFinish = () => {
+  const checkEmailAvailability = async () => {
+    try {
+      const emailExists = await axiosRequest.get(
+        `/users/verify_email/${formData.email}`
+      );
+
+      if (emailExists.status === 200) {
+        return false;
+      }
+    } catch (error) {
+      console.log(error);
+
+      setNewAlert({ type: "error", message: error.response.data.message });
+      return true;
+    }
+  };
+
+  const onFinish = async () => {
+    clearAlerts();
     if (CURRENT_STEP === GENERAL_INFO) {
-      setCURRENT_STEP(VERIFICATION);
-    } else if (CURRENT_STEP === VERIFICATION) {
-      setCURRENT_STEP(PASSWORD);
+      const emailExists = await checkEmailAvailability();
+      console.log(emailExists);
+
+      if (!emailExists) {
+        setCURRENT_STEP(PASSWORD);
+      }
+      //setCURRENT_STEP(VERIFICATION); -- VERIFICATION CODE STEP
     } else if (CURRENT_STEP === PASSWORD) {
       createAccount();
     }
@@ -68,8 +93,7 @@ const RegisterForm = () => {
         <h5>{stepTitle}</h5>
         {stepDescription && <p>{stepDescription}</p>}
         <div className="form-container">
-          <Form
-            layout="vertical"
+          <CustomForm
             className="form"
             onFinish={onFinish}
             onValuesChange={onFormChange}
@@ -100,7 +124,7 @@ const RegisterForm = () => {
                 <Link to="/login">Log in</Link>
               </Button>
             </div>
-          </Form>
+          </CustomForm>
         </div>
       </div>
     </div>
