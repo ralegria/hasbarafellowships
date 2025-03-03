@@ -46,10 +46,10 @@ const DonateTable = () => {
       const generatedPaymentURL = await axiosRequest.post(
         "/donations/generate",
         {
-          user_id: userInfo.id,
+          user_id: userInfo.short_id,
           amount_donated: donationAmount,
-          cancel_url: `${process.env.REACT_APP_BASE_URL}/#/${userInfo.id}`,
-          success_url: `${process.env.REACT_APP_BASE_URL}/#/${userInfo.id}/donation/success`,
+          cancel_url: `${process.env.REACT_APP_BASE_URL}/#/${userInfo.short_id}`,
+          success_url: `${process.env.REACT_APP_BASE_URL}/#/${userInfo.short_id}/donation/success`,
         }
       );
 

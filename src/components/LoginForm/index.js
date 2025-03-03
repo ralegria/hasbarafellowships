@@ -30,11 +30,11 @@ const LoginForm = () => {
         localStorage.setItem(
           LOCAL_STORAGE.TOKEN,
           JSON.stringify({
-            userId: data.id,
+            userId: data.short_id,
             token,
           })
         );
-        finishLoading(() => navigate(`/${data.id}`));
+        finishLoading(() => navigate(`/${data.short_id}`));
       }
     } catch (error) {
       finishLoading();

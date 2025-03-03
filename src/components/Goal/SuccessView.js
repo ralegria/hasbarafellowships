@@ -30,7 +30,7 @@ const SuccessView = () => {
       </div>
       <div className="actions-container">
         <Button type="primary">
-          <Link to={`/${userInfo.id}`}>Donate more</Link>
+          <Link to={`/${userInfo.short_id}`}>Donate more</Link>
         </Button>
         <span className="or-login">
           You can also share this page with friends

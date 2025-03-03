@@ -36,11 +36,11 @@ const RegisterForm = () => {
         localStorage.setItem(
           LOCAL_STORAGE.TOKEN,
           JSON.stringify({
-            userId: data.id,
+            userId: data.short_id,
             token,
           })
         );
-        navigate(`/${data.id}`);
+        navigate(`/${data.short_id}`);
       }
     } catch (error) {
       console.log(error);
