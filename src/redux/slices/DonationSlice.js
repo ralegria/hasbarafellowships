@@ -1,12 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-const initialState = {
-  amount: 0,
-};
+
 export const DonationSlice = createSlice({
   name: "DonationSlice",
-  initialState,
+  initialState: {
+    amount: 0,
+  },
   reducers: {
     setDonationAmount: (state, action) => {
+      console.log(action.payload, { ...state, amount: action.payload });
+
       state.amount = action.payload;
     },
   },
