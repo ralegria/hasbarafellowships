@@ -9,10 +9,13 @@ import CustomForm from "../CustomForm";
 import useUI from "../../hooks/useUI";
 
 import { toCents } from "../../utils";
+import { useSelector } from "react-redux";
 
 const DonateTable = () => {
+  console.log("MyComponent is rendering");
   const sectionName = "donation-table";
   const amounts = [25, 50, 100, 250, 500, 1000];
+  const donationAmount = useSelector((state) => state.UI.donation_amount);
   const [form] = Form.useForm();
 
   const {
@@ -22,7 +25,6 @@ const DonateTable = () => {
     setDonation,
     finishLoading,
     SectionIsLoading,
-    donationAmount,
     userInfo,
   } = useUI();
 
@@ -34,8 +36,6 @@ const DonateTable = () => {
   };
 
   const onCustomDonation = ({ amount_donated }) => {
-    //console.log(toCents(amount_donated));
-
     setDonation(toCents(amount_donated));
   };
 
@@ -86,6 +86,7 @@ const DonateTable = () => {
       </ul>
       <CustomForm
         form={form}
+        name="Custom Amount Form"
         layout="vertical"
         className="donation-form"
         onValuesChange={onCustomDonation}

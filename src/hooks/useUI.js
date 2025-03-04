@@ -5,6 +5,7 @@ import {
   setNewFormAlert,
   switchGoalEditMode,
   switchProfileEditMode,
+  setDonationAmount,
 } from "../redux/slices/UISlice";
 import {
   setGoal,
@@ -12,8 +13,6 @@ import {
   setEmptyGoal as setEmpty,
   setLogStatus as setLog,
 } from "../redux/slices/UserSlice";
-import { setDonationAmount } from "../redux/slices/DonationSlice";
-import { useCallback } from "react";
 
 const errorInitialValue = { type: "success", message: null };
 
@@ -24,7 +23,6 @@ export const useUI = () => {
   const isGoalEditing = useSelector((store) => store.UI.goalEditMode);
   const userInfo = useSelector((store) => store.user.info);
   const goalInfo = useSelector((store) => store.user.goal);
-  const donationAmount = useSelector((store) => store.donations.amount);
 
   //const loading = (section) => dispatch(switchLoading({ section }));
   const setUserInfo = (info) => dispatch(storeUser(info));
@@ -41,19 +39,14 @@ export const useUI = () => {
       store.UI.loading.section === section ? store.UI.loading.isLoading : false
     );
 
-  const loading = useCallback(
-    (section) => dispatch(isLoading({ section })),
-    [dispatch]
-  );
-  const finishLoading = useCallback(
-    (callback = () => {}) => {
-      setTimeout(() => {
-        dispatch(notLoading());
-        callback();
-      }, 1000);
-    },
-    [dispatch]
-  );
+  const loading = (section) => dispatch(isLoading({ section }));
+
+  const finishLoading = (callback = () => {}) => {
+    setTimeout(() => {
+      dispatch(notLoading());
+      callback();
+    }, 1000);
+  };
 
   return {
     isLogged,
@@ -61,7 +54,6 @@ export const useUI = () => {
     isGoalEditing,
     userInfo,
     goalInfo,
-    donationAmount,
     setLogStatus,
     SectionIsLoading,
     loading,
